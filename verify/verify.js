@@ -7,68 +7,32 @@
 
     app.controller('VerifyCtrl', ['$scope', '$routeParams', '$firebaseObject', '$filter', 'user', 'verify', function($scope, $routeParams, $firebaseObject, $filter, user, verify) {
         $scope.admin = {};
-        //$scope.admin.email = $scope.profileEmail;
-        //$scope.admin.baseRateUnit = "Day";
+        var temp; //to store temp value of request.status 
         var orderRef =  $routeParams.orderRef;
         $scope.request = $firebaseObject(verify.ordersRef.child(orderRef));
-        //$scope.vendor = $firebaseObject(verify.vendorRef);
-        //$scope.vehicles = {};
-        //$scope.balance = $firebaseObject(verify.vendorCurrentBalanceRef);
 
-        /*$scope.vendor.$loaded().then(function() {
-            if (angular.isDefined($scope.request.vehicleCategory) && angular.isDefined($scope.vendor.vehicles)) {
-                $scope.vehicles = $scope.vendor.vehicles[$scope.request.vehicleCategory];
-            }
-            $scope.admin.company = $scope.vendor.companyName;
-            $scope.admin.phone = $scope.vendor.pPhone;
-            $scope.admin.contactPerson = $scope.vendor.contactPerson;
-        });*/
+        //must wait until firebase finish loading
+        $scope.request.$loaded().then(function() {
+            $scope.checkStatus = $scope.request.status;
+        });
+    
         $scope.$watch('profileEmail', function() {
             $scope.admin.email = $scope.profileEmail;
             $scope.admin.name = $scope.profileName;
             $scope.admin.phone = $scope.profilePhone;
 
         });
-
         
-        /*
-        $scope.$watch('profileEmail', function() {
-            $scope.admin.email = $scope.profileEmail;
-            $scope.request.$loaded().then(function() {
-                angular.forEach($scope.request.admins, function(value, key) {
-                    if (value.email === $scope.profileEmail) {
-                        $scope.myadmin = value;
-                    }
-                });
-            });
-        });
-        /*
-        $scope.request.$loaded().then(function() {
-            if (angular.isDefined($scope.vendor.vehicles)) {
-                $scope.vehicles = $scope.vendor.vehicles[$scope.request.vehicleCategory];
-            }
-            $scope.admin.driver = $scope.request.driver;
-
-            angular.forEach($scope.request.admins, function(value, key) {
-                if (value.email === $scope.profileEmail) {
-                    $scope.myadmin = value;
-                }
-            });
-
-        });
-
-        $scope.balance.$loaded().then(function() {
-            $scope.myBalance = $scope.balance.$value || 0;
-        });
-
-        $scope.isEnoughBalance = function() {
-            return ($scope.myBalance > 5000);
-        }
-        */
-
+        
         $scope.verifyOrder = function(){
             verify.verifyOrder($scope.admin.orderStatus,orderRef);
+        };
+        
+        
 
+        $scope.checkStatus = function(){
+            verify.checkStatus(temp);
+            
         };
 
         $scope.$on('$destroy', function () {
@@ -94,7 +58,15 @@
                 factory.orderRef = factory.ref.child("orders/" + orderRef);
                 factory.orderRef.update({status : newstatus});
             };
-
+            
+            factory.checkStatus = function(status){
+                if (status === "Approved"){
+                    return true;
+                } else {
+                    return false;
+                }     
+            };
+            
             return factory;
         }
     ]);
