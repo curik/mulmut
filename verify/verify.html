@@ -112,26 +112,32 @@
                         <input type="text" class="form-control margin-bottom-20" id="companyEmail" ng-model="admin.email" readonly required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" >
                     
-                        <input type="radio" name="orderStatus" value="Approve" ng-model="admin.orderStatus"> Approve
+                        <input type="radio" name="orderStatus" value="Approved" ng-model="admin.orderStatus"> Approve
                         &nbsp;&nbsp;
-                        <input type="radio" name="orderStatus" value="Reject" ng-model="admin.orderStatus"> Reject
+                        <input type="radio" name="orderStatus" value="Cancelled" ng-model="admin.orderStatus"> Cancel
                     </div>
 
                     <div class="row">
+                        <div class="col-lg-4">
+                        </div>
+
+                        <div class="col-lg-4 text-right">
+                        
+                            <button class="btn-u" ng-disabled="checkStatus === 'Approved'" ng-click="verifyOrder()">Proses</button>
+                            
+                        </div>
+                    </div>
+                
                     <div class="col-lg-4">
                     </div>
 
-                    <div class="col-lg-4 text-right">
-                    
-                        <button class="btn-u" ng-click="verifyOrder()">Proses</button>
-        
-                    </div>
-                    </div>
-                    <div class="col-lg-4">
-                    </div>
-                    </div>
+            
+                        
+                   
+
+
                     
 
                 </form>
