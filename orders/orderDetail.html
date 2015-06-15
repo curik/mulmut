@@ -1,0 +1,116 @@
+<!--=== Content Part ===-->
+<br/>
+<div class="container">
+    <div ng-hide="order.orderId">
+        {{status}}
+    </div>
+    <div class="row" ng-show="order.quotes">
+        <div class="col-md-12">
+        <!-- Pricing -->
+        <div class="row margin-bottom-40">
+            <div ng-repeat="q in order.quotes" class="col-md-4">
+                <div class="pricing">
+                    <div class="pricing-head">
+                        <h3 class="text-center panel-vendor no-top-margin">{{q.vehicleString}}</h3>
+                        <h4 class="text-center">Base Total: {{q.baseTotal|currency:"Rp ":0}}</h4>
+                        <h4 class="text-center">All-in Price: {{q.allInPrice|currency:"Rp ":0}}</h4>
+                    </div>
+                    <ul class="pricing-content list-unstyled">
+                        <li class="text-center" ng-hide="q.driver === 'withDriver'">Driver not included</li>
+                        <li class="text-center" ng-show="q.driver === 'withDriver'">Driver included</li>
+                        <li class="text-center">Base Rate: {{q.baseRate|currency:"Rp ":0}}/{{q.baseRateUnit}}</li>
+                        <li class="text-center" ng-show="q.driver === 'withDriver'">Driver hourly overtime: {{q.driverHourlyOvertime|currency:"Rp ":0}}</li>
+                        <li class="text-center" ng-show="q.driver === 'withDriver'">Driver daily allowance: {{q.driverDailyAllowancel|currency:"Rp ":0}}</li>
+                        <li class="text-center">Company: {{q.company}}</li>
+                        <li class="text-center">Contact Person: {{q.contactPerson}}</li>
+                        <li class="text-center">Phone: {{q.phone}}</li>
+                        <li class="text-center">Email: {{q.email}}</li>
+                    </ul>
+                    <div class="pricing-footer text-center" ng-show="q.note">
+                        <p><i>{{q.note}}</i></p>
+                        <!--<button>Pick</button>-->
+                    </div>
+                </div>
+            </div>
+        </div><!--/row-->
+        <!--//End Pricing -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <!--Order Table-->
+        <div class="panel panel-orange margin-bottom-40" ng-show="order.orderId">
+            <div class="panel-heading">
+                <h3 class="panel-title">Detail for Your Request# {{order.orderId}}</h3>
+            </div>
+            <table class="table table-striped invoice-table">
+                <tbody>
+                    <tr>
+                        <th>OrderID</th>
+                        <td>{{order.orderId}}</td>
+                    </tr>
+                    <tr ng-show="order.quotes && order.quotesSize && order.quotesSize > 0">
+                        <th>Status</th>
+                        <td>Received {{order.quotesSize}} quote(s)</td>
+                    </tr>
+                    <tr ng-hide="order.quotes && order.quotesSize && order.quotesSize  > 0">
+                        <th>Status</th>
+                        <td>Waiting for quotes...</td>
+                    </tr>
+                    <tr>
+                        <th>Request time</th>
+                        <td>{{order.orderTime}}</td>
+                    </tr>
+                    <tr>
+                        <th>Driver</th>
+                        <td>{{order.driver}}</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>{{order.locationDetail}}, {{order.location}}</td>
+                    </tr>
+                    <tr>
+                        <th>From</th>
+                        <td>{{order.reservationStartTime}}</td>
+                    </tr>
+                    <tr>
+                        <th>Until</th>
+                        <td>{{order.reservationEndTime}} ({{order.rentDuration}} {{order.rentDurationUnit}}s)</td>
+                    </tr>
+                    <tr>
+                        <th>Where to</th>
+                        <td class="capitalize">{{order.whereToArea}} {{order.whereTo}}</td>
+                    </tr>
+                    <tr>
+                        <th>Vehicle</th>
+                        <td class="capitalize">{{order.vehicleClass}} {{order.vehicleCategory}}</td>
+                    </tr>
+                    <tr ng-show="order.specialRequest">
+                        <th>Special Request</th>
+                        <td>{{order.specialRequest}}</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td class="capitalize">{{order.name}}</td>
+                    </tr>
+                    <tr ng-show="order.company">
+                        <th>Company Name</th>
+                        <td class="capitalize">{{order.company}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>{{order.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td>{{order.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <!--End Order Table-->
+    </div>
+</div><!--/container-->
+<br/>
+<!--=== End Content Part ===-->

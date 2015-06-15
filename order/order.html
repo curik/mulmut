@@ -1,0 +1,163 @@
+<meta name="viewport" content="width=device-width, user-scalable=0" />
+<!--=== Content Part ===-->
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <form class="reg-page" name="orderForm" ng-submit="placeOrder()" role="form" novalidate>
+                <div class="reg-header">
+                    <h2>Saya butuh rental mobil</h2>
+                </div>
+
+                <div class="form-group">
+                    <ul class="radio-button">
+                        <li>
+                            <input type="radio" id="d1" name="driver" value="withDriver" ng-model="order.driver" class="margin-bottom-20"/>
+                            <label for="d1">Dengan Supir</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="d2" name="driver" value="withoutDriver" ng-model="order.driver" class="margin-bottom-20"/>
+                            <label for="d2">Tanpa Supir</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="form-group">
+                    <label for="inputLocation" class="control-label">Lokasi Saya</label>
+                    <select class="form-control margin-bottom-20" id="inputLocation" ng-model="order.location" required>
+                        <option value="" disabled selected>Lokasi Saya</option>
+                        <option value="Jakarta">Jakarta</option>
+                        <option value="Bogor">Bogor</option>
+                        <option value="Depok">Depok</option>
+                        <option value="Tangerang">Tangerang</option>
+                        <option value="Bekasi">Bekasi</option>
+                        <option value="Bali">Bali</option>
+                        <option value="Surabaya">Surabaya</option>
+                    </select>
+                    <input type="text" class="capitalize form-control margin-bottom-20" id="inputLocationDetail" ng-model="order.locationDetail" placeholder="Nama daerah atau area" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dropdown2" class="control-label">Tanggal Sewa</label>
+                    <div class="dropdown margin-bottom-20">
+                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
+                            <div class="input-group"><input type="text" class="form-control" data-ng-model="order.when" placeholder="Saya ingin sewa pada tanggal" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="order.when" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'hour', minuteStep: 1}" data-before-render="beforeRender($view, $dates, $leftDate, $upDate, $rightDate)"/>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="whereTo" class="control-label">Tujuan</label>
+                    <select class="form-control margin-bottom-20" id="whereTo" ng-model="order.whereTo" required>
+                        <option value="" disabled selected>Saya ingin berpergian ke</option>
+                        <option value="withinCity">Dalam Kota</option>
+                        <option value="outOfTown">Luar Kota</option>
+                        {{ order.whereToArea = "" }}
+                    </select>
+                    <input type="text" class="capitalize form-control margin-bottom-20" ng-model="order.whereTo" ng-minlength="3" ng-show="order.whereToArea === 'outOfTown'" placeholder="Bandung, Puncak...">
+                </div>
+
+                <div class="form-group">
+                    <label for="rentDuration" class="control-label">Durasi Sewa</label>
+                    <input type="number" class="form-control" id="rentDuration" ng-model="order.rentDuration" placeholder="0" min="1" ng-change="updateDuration()" required>
+                    <input type="radio" name="rentDurationUnit" value="Hour" ng-model="order.rentDurationUnit"> Jam
+                    &nbsp;&nbsp;
+                    <input type="radio" name="rentDurationUnit" value="Day" ng-model="order.rentDurationUnit"> Hari
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Jenis Mobil: </label>
+                    <ul class="radio-button">
+                        <li class="vt-height">
+                            <input type="radio" id="vt1" name="vehicleCategory" value="Hatchback" ng-model="order.vehicleCategory" class="margin-bottom-20"/>
+                            <label for="vt1">Hatchback<br/>4 <i class="glyphicon glyphicon-user"></i> 1 <i class="glyphicon glyphicon-briefcase"></i></label>
+                        </li>
+                        <li class="vt-height">
+                            <input type="radio" id="vt2" name="vehicleCategory" value="Sedan" ng-model="order.vehicleCategory" class="margin-bottom-20"/>
+                            <label for="vt2">Sedan<br/>4 <i class="glyphicon glyphicon-user"></i> 2-3 <i class="glyphicon glyphicon-briefcase"></i></label>
+                        </li>
+                        <li class="vt-height">
+                            <input type="radio" id="vt3" name="vehicleCategory" value="SUV" ng-model="order.vehicleCategory" class="margin-bottom-20"/>
+                            <label for="vt3">SUV<br/>7 <i class="glyphicon glyphicon-user"></i> 3-4 <i class="glyphicon glyphicon-briefcase"></i></label>
+                        </li>
+                        <li class="vt-height">
+                            <input type="radio" id="vt4" name="vehicleCategory" value="MPV" ng-model="order.vehicleCategory" class="margin-bottom-20"/>
+                            <label for="vt4">MPV<br/>7 <i class="glyphicon glyphicon-user"></i> 3-4 <i class="glyphicon glyphicon-briefcase"></i></label>
+                        </li>
+                        <li class="vt-height">
+                            <input type="radio" id="vt5" name="vehicleCategory" value="Minibus" ng-model="order.vehicleCategory" class="margin-bottom-20"/>
+                            <label for="vt5">Minibus<br/>10-20 <i class="glyphicon glyphicon-user"></i></label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="clearfix"></div>
+                
+
+                <div class="form-group">
+                    <label class="control-label">Tipe Mobil: </label>
+                    <ul class="radio-button">
+                        <li>
+                            <input type="radio" id="vc1" name="vehicleClass" value="Standard" ng-model="order.vehicleClass" class="margin-bottom-20"/>
+                            <label for="vc1">Standar</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="vc2" name="vehicleClass" value="Premium" ng-model="order.vehicleClass" class="margin-bottom-20" ng-hide="hidePremiumButton()"/>
+                            <label for="vc2" ng-hide="hidePremiumButton()">Premium</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="form-group" ng-show="estimatedRate">
+                    <label class="control-label">Estimasi Harga:</label>
+                    <pre>{{estimatedRate}}</pre>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputSpecialRequest" class="control-label">Saya juga mau:</label>
+                    <textarea class="form-control margin-bottom-20" id="inputSpecialRequest" ng-model="order.specialRequest" ng-minlength="3" rows="3" placeholder="Harap isi kebutuhan spesifik anda jika ada"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputName" class="control-label">Nama Saya</label>
+                    <input type="text" class="capitalize form-control margin-bottom-20" id="inputName" ng-model="order.name" ng-minlength="3" placeholder="Nama" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputCompany" class="control-label">Nama Perusahaan (jika ada)</label>
+                    <input type="text" class="form-control margin-bottom-20" id="inputCompany" ng-model="order.company" placeholder="Dapatkan harga spesial untuk rental perusahaan">
+                </div>
+                <div class="form-group">
+                    <label for="inputPhone" class="control-label">Nomor HP Saya</label>
+                    <input type="text" class="form-control margin-bottom-20" id="inputPhone" ng-model="order.phone" ng-pattern="/^0[28][0-9]{8,}$/"  ng-model-options="{allowInvalid: true}"  placeholder="Nomor yang bisa dihubungi" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label">Email Saya</label>
+                    <input type="email" class="form-control margin-bottom-20" id="inputEmail" ng-model="order.email" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" placeholder="Untuk konfirmasi" required readonly>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4 text-right">
+                        <button class="btn-u" type="submit" ng-disabled="orderForm.$invalid">Proses Sekarang</button>
+                        <!--<button class="btn-u" type="submit">Request Quotes</button>-->
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                </div>
+            </form>
+            <br/>
+        </div>
+    </div>
+</div><!--/container-->
+<br/>
+<!--=== End Content Part ===-->

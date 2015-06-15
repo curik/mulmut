@@ -1,0 +1,140 @@
+<!--=== Content Part ===-->
+<br/>
+<div class="container">
+    <h1 class="panel-heading">Verify Order</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <!--Requests Table-->
+            <div class="panel panel-orange margin-bottom-40" ng-show="request">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ID</h3>
+                </div>
+                <table class="table table-striped invoice-table">
+                    <tbody>
+                    <tr>
+                        <th>RequestID</th>
+                        <td>{{request.orderId}}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{request.status}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel panel-orange margin-bottom-40" ng-show="request">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Details</h3>
+                </div>
+                <table class="table table-striped invoice-table">
+                    <tbody>
+                    <tr>
+                        <th>Driver</th>
+                        <td>{{request.driver}}</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>{{request.locationDetail}}, {{request.location}}</td>
+                    </tr>
+                    <tr>
+                        <th>Start Time</th>
+                        <td>{{request.reservationStartTime}}</td>
+                    </tr>
+                    <tr>
+                        <th>Rent Duration</th>
+                        <td>{{request.rentDuration}} {{request.rentDurationUnit}}s</td>
+                    </tr>
+                    <tr>
+                        <th>Vehicle</th>
+                        <td>{{request.vehicleClass}} {{request.vehicleCategory}}</td>
+                    </tr>
+                    <tr ng-show="request.specialRequest">
+                        <th>Special Request</th>
+                        <td>{{request.specialRequest}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--End Requests Table-->
+            <!--Customer Table-->
+            <div class="panel panel-orange margin-bottom-40" ng-show="request">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Customer</h3>
+                </div>
+                <table class="table table-striped invoice-table">
+                    <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{request.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Company</th>
+                        <td>{{request.company}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{request.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>{{request.phone}}</td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+            <!--End Customer Table-->
+        </div>
+
+        <div class="col-md-6">
+            <!--verify Form-->
+            <div class="panel panel-orange margin-bottom-40" ng-show="request && !myQuote">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Order # {{request.orderId}} checked by:</h3>
+                </div>
+                <form class="reg-page-m" name="verifyForm" ng-submit="placeverify()" role="form" novalidate>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                        <label for="companyName" class="control-label">Admin Name</label>
+                        <input type="text" class="form-control margin-bottom-20" id="adminName" ng-model="admin.name" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPerson" class="control-label">Admin Phone</label>
+                        <input type="text" class="form-control margin-bottom-20" id="contactPerson" ng-model="admin.phone" readonly required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyEmail" class="control-label">Admin Email</label>
+                        <input type="text" class="form-control margin-bottom-20" id="companyEmail" ng-model="admin.email" readonly required>
+                    </div>
+
+                    <div class="form-group">
+                    
+                        <input type="radio" name="orderStatus" value="Approve" ng-model="admin.orderStatus"> Approve
+                        &nbsp;&nbsp;
+                        <input type="radio" name="orderStatus" value="Reject" ng-model="admin.orderStatus"> Reject
+                    </div>
+
+                    <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4 text-right">
+                        <button class="btn-u" type="submit" ng-submit="verifyOrder(admin.orderStatus)">Proses</button>
+                        <!--<button class="btn-u" type="submit">Request Quotes</button>-->
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                    </div>
+                    
+
+                </form>
+            </div>
+            <!--End verify Form-->
+
+    </div>
+</div><!--/container-->
+<br/>
+<!--=== End Content Part ===-->

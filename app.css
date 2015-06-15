@@ -1,0 +1,115 @@
+/* app css stylesheet */
+
+body {
+  /*margin: 10px;*/
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li.hide {
+   display: none;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+p.status {
+   color: red;
+}
+
+p.status.good, p.good {
+   color: green;
+}
+
+form label {
+   display: block;
+   margin: 15px 0;
+}
+
+form label span {
+   display: block;
+   font-weight: bold;
+}
+
+.error {
+   color: red;
+}
+
+fieldset {
+   float: left;
+   margin-right: 25px;
+   padding: 25px;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.control-label {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/*Forms*/
+
+input.ng-invalid {
+    border: 1px solid red;
+}
+input.ng-valid {
+    border: 1px solid green;
+}
+textarea.ng-invalid {
+    border: 3px solid red;
+}
+textarea.ng-valid {
+    border: 1px solid green;
+}
+select.ng-invalid {
+    border: 1px solid red;
+}
+select.ng-valid {
+    border: 1px solid green;
+}
+
+.center-cropped {
+    object-fit: none; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    width: 100%;
+}
+
+.reg-page-m {
+    padding:15px;
+}
+
+/*Table*/
+.fit-table {
+    table-layout: fixed!important;
+    font-size: 13px!important;
+}
+
+
+

@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+            <form class="reg-page">
+                <fieldset>
+                    <legend>User Profile</legend>
+                    <label ng-show="profile.mode !== 'customer'">
+                        {{profile.mode||"customer" | uppercase}} Account
+                    </label>
+                    <label>
+                        <span>Name:</span>
+                        <input class="capitalize" type="text" name="name" ng-model="profile.name"/>
+                    </label>
+                    <label>
+                        <span>Company Name:</span>
+                        <input class="capitalize" type="text" name="companyName" ng-model="profile.companyName"/>
+                    </label>
+                    <label>
+                        <span>Phone:</span>
+                        <input type="text" ng-pattern="/^0[28][0-9]{8,}$/" ng-model-options="{allowInvalid: true}" name="phone" ng-model="profile.phone"/>
+                    </label>
+                    <label>
+                        <span>Email:</span>
+                        <input type="text" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" name="email" ng-model="profile.email" readonly/>
+                    </label>
+                    <button class="btn-u" ng-click="logout()">Log Out</button>
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-md-4" ng-hide="provider === 'facebook'">
+            <form>
+                <fieldset>
+                    <legend>Change Password</legend>
+                    <label>
+                        <span>Old Password:</span>
+                        <input type="password" ng-keypress="clear()" ng-model="oldpass"/>
+                    </label>
+
+                    <label>
+                        <span>New Password:</span>
+                        <input type="password" ng-keypress="clear()" ng-model="newpass"/>
+                    </label>
+
+                    <label>
+                        <span>Confirm New Password:</span>
+                        <input type="password" ng-keypress="clear()" ng-model="confirm"/>
+                    </label>
+
+                    <button ng-click="changePassword(oldpass, newpass, confirm)">change password</button>
+
+                    <p class="error" ng-show="err">{{err}}</p>
+                    <p class="good" ng-show="msg">{{msg}}</p>
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>

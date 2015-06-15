@@ -1,0 +1,76 @@
+
+<!--=== Content Part ===-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            <form class="reg-page">
+                <!--
+                <div class="reg-header">
+                    <h2><br/></h2>
+                </div>
+                -->
+                <br/>
+                <br/>
+                <div class="input-group margin-bottom-20 pull-left">
+                    <button class="btn btn-primary" ng-click="facebookLogin()">Login with Facebook</button>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <hr>
+                <br/>
+
+                <h3>Mulmut Login</h3>
+                <br/>
+                <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input type="text" placeholder="Your email" ng-model="email" class="form-control">
+                </div>
+                <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input type="password" placeholder="Your password" ng-model="pass" class="form-control">
+                </div>
+                <div class="input-group margin-bottom-20" ng-show="createMode">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input type="password" placeholder="Retype password" ng-model="confirm" class="form-control">
+                </div>
+                <div class="input-group margin-bottom-20" ng-show="createMode">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" placeholder="Your name" ng-model="name" class="form-control">
+                </div>
+                <div class="input-group margin-bottom-20" ng-show="createMode">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                    <input type="text" placeholder="Your phone" ng-model="phone" class="form-control">
+                </div>
+
+                <div class="input-group margin-bottom-20 pull-right" ng-hide="createMode">
+                    <button class="btn-u" ng-click="login(email, pass)" ng-disabled="loginButtonDisabled">Login</button>
+                    &nbsp;&nbsp;
+                    <button class="btn-u" ng-click="createMode = true">Register</button>
+                </div>
+
+                <div class="input-group margin-bottom-20 pull-right" ng-show="createMode">
+                    <button class="btn-u" ng-click="createAccount()" ng-disabled="createButtonDisabled">Create</button>
+                    &nbsp;&nbsp;
+                    <button class="btn-u" ng-click="createMode = false">Cancel</button>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class=" margin-bottom-20 text-center" ng-show="err">
+                    <p class="error">{{err}}</p>
+                </div>
+                <div class=" margin-bottom-20 text-center" ng-show="info">
+                    <p class="info">{{info}}</p>
+                </div>
+                <hr>
+                <div ng-show="email">
+                    <h4>Forget your Password ?</h4>
+                    <p>No worries, <a class="color-green" href="" ng-click="resetPassword(email)">Request a password reset</a></p>
+                </div>
+            </form>
+            <br/>
+        </div>
+    </div><!--/row-->
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
