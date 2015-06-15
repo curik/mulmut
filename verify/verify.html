@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col-md-6">
             <!--Requests Table-->
+
             <div class="panel panel-orange margin-bottom-40" ng-show="request">
                 <div class="panel-heading">
                     <h3 class="panel-title">ID</h3>
@@ -93,7 +94,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Order # {{request.orderId}} checked by:</h3>
                 </div>
-                <form class="reg-page-m" name="verifyForm" ng-submit="placeverify()" role="form" novalidate>
+                <form class="reg-page-m" name="verifyForm">
 
                     <div class="clearfix"></div>
 
@@ -121,9 +122,12 @@
                     <div class="row">
                     <div class="col-lg-4">
                     </div>
+
                     <div class="col-lg-4 text-right">
-                        <button class="btn-u" type="submit" ng-submit="verifyOrder(admin.orderStatus)">Proses</button>
-                        <!--<button class="btn-u" type="submit">Request Quotes</button>-->
+                    
+                        <button class="btn-u" ng-click="verifyOrder()">Proses</button>
+        
+                    </div>
                     </div>
                     <div class="col-lg-4">
                     </div>
