@@ -1,0 +1,46 @@
+<!--=== Content Part ===-->
+<br/>
+<div class="container">
+    <div class="row" ng-hide="requests">
+        {{status}}
+    </div>
+    <!--<div class="row">-->
+        <!--Requests Table-->
+        <div class="panel panel-orange margin-bottom-40" ng-show="requests">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">All Orders</h3>
+            </div>
+            <table class="table table-striped table-hover invoice-table fit-table">
+                <thead>
+                <tr>
+                    <th>RequestID</th>
+                    <th>Status</th>
+                    <th>Driver</th>
+                    <th>Location</th>
+                    <th>Start Time</th>
+                    <th>Rent Duration</th>
+                    <th>Vehicle</th>
+                    <th>Special Request</th>
+                    <th>Quotes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="val in requests | orderBy:'orderId':true" ng-click="goToOrder(val.$id)">
+                    <td>{{val.orderId}}</td>
+                    <td>{{val.status}}</td>
+                    <td>{{val.driver}}</td>
+                    <td>{{val.locationDetail}}, {{val.location}}</td>
+                    <td>{{val.reservationStartTime}}</td>
+                    <td>{{val.rentDuration}} {{val.rentDurationUnit}}s</td>
+                    <td class="capitalize">{{val.vehicleClass}} {{val.vehicleCategory}}</td>
+                    <td>{{val.specialRequest}}</td>
+                    <td>{{val.quotes | getNumQuotes:this}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--End Requests Table-->
+    <!--</div>-->
+</div><!--/container-->
+<br/>
+<!--=== End Content Part ===-->

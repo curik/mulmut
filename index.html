@@ -64,7 +64,7 @@
             <div class="collapse navbar-collapse navbar-responsive-collapse" ng-cloak>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#/home" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#/home" class="dropdown-toggle" ng-show="profileMode === 'customer'" data-toggle="dropdown">
                             Home
                         </a>
                     </li>
@@ -79,8 +79,13 @@
                         </a>
                     </li>
                     <li class="dropdown" ng-show="profileMode === 'admin'">
-                        <a href="#/admin" class="dropdown-toggle" data-toggle="dropdown">
-                            Admin Page
+                        <a href="#/aorders" class="dropdown-toggle" data-toggle="dropdown">
+                            Orders
+                        </a>
+                    </li>
+                    <li class="dropdown" ng-show="profileMode === 'admin'">
+                        <a href="#/ausers" class="dropdown-toggle" data-toggle="dropdown">
+                            Users
                         </a>
                     </li>
                     <li class="dropdown" ng-show="profileMode === 'vendor'">
@@ -159,7 +164,8 @@
 <script src="vprofile/vprofile.js"></script>
 <script src="login/login.js"></script>
 <script src="logout/logout.js"></script>
-<script src ="admin/admin.js"></script>
+<script src ="aorders/aorders.js"></script>
+<script src ="ausers/ausers.js"></script>
 <script src ="verify/verify.js"></script> 
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
