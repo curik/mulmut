@@ -146,6 +146,10 @@
                     order.orderId = orderId;
                     order.timestamp = Firebase.ServerValue.TIMESTAMP;
 
+                    if (order.whereTo === "withinCity") {
+                        order.whereToArea = "";
+                    }
+
                     if (orderId > 1000) {
                         var ref = self.ordersRef.push(order);
                         //console.dir(ref);

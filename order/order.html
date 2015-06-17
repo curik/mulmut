@@ -57,9 +57,8 @@
                         <option value="" disabled selected>Saya ingin berpergian ke</option>
                         <option value="withinCity">Dalam Kota</option>
                         <option value="outOfTown">Luar Kota</option>
-                        {{ order.whereToArea = "" }}
                     </select>
-                    <input type="text" class="capitalize form-control margin-bottom-20" ng-model="order.whereTo" ng-minlength="3" ng-show="order.whereToArea === 'outOfTown'" placeholder="Bandung, Puncak...">
+                    <input type="text" class="capitalize form-control margin-bottom-20" ng-model="order.whereToArea" ng-minlength="3" ng-show="order.whereTo === 'outOfTown'" placeholder="Bandung, Puncak...">
                 </div>
 
                 <div class="form-group">
@@ -134,7 +133,7 @@
                     <input type="text" class="form-control margin-bottom-20" id="inputCompany" ng-model="order.company" placeholder="Dapatkan harga spesial untuk rental perusahaan">
                 </div>
                 <div class="form-group">
-                    <label for="inputPhone" class="control-label">Nomor HP Saya</label>
+                    <label for="inputPhone" class="control-label">Nomor HP</label>
                     <input type="text" class="form-control margin-bottom-20" id="inputPhone" ng-model="order.phone" ng-pattern="/^0[28][0-9]{8,}$/"  ng-model-options="{allowInvalid: true}"  placeholder="Nomor yang bisa dihubungi" required>
                 </div>
                 <div class="form-group">
