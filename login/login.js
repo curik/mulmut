@@ -70,7 +70,7 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
                       if(profile.mode === 'vendor') {
                           $location.path("/bidboard");
                       } else if(profile.mode === 'admin') {
-                          $location.path("/admin");
+                          $location.path("/aorders");
                       } else {
                           $location.path("/orderhistory");
 
@@ -104,9 +104,10 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
         var name = $scope.name;
         var phone = $scope.phone;
         var companyName = $scope.companyName;
+        var counter = 0;
         var mode = "customer"; //user or vendor
         // create user credentials in Firebase auth system
-        Auth.$createUser({email: email, password: pass, name: name, phone: phone, mode: mode, companyName: companyName||""})
+        Auth.$createUser({counter : counter, email: email, password: pass, name: name, phone: phone, mode: mode, companyName: companyName||""})
           .then(function() {
             // authenticate so we have permission to write to Firebase
             return Auth.$authWithPassword({ email: email, password: pass });
