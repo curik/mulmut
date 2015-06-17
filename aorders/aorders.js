@@ -14,7 +14,7 @@
         });
 
         $scope.goToOrder = function (orderRef) {
-            $location.path("/verify/" + orderRef);
+            $location.path("/editorder/" + orderRef);
         };
 
         $scope.$on('$destroy', function () {

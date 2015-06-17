@@ -11,7 +11,7 @@ angular.module('myApp', [
     'myApp.orderhistory',
     'myApp.aorders',
     'myApp.ausers',
-    'myApp.verify',
+    'myApp.editorder',
     'myApp.bidboard',
     'myApp.bid',
     'myApp.orders',

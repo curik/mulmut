@@ -92,7 +92,7 @@
             <!--verify Form-->
             <div class="panel panel-orange margin-bottom-40" ng-show="request && !myQuote">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Order # {{request.orderId}} checked by:</h3>
+                    <h3 class="panel-title">Admin details:</h3>
                 </div>
                 <form class="reg-page-m" name="verifyForm">
 
@@ -129,7 +129,7 @@
 
                         <div class="col-lg-4 text-right">
                         
-                            <button class="btn-u" ng-disabled="request.status === 'Approved'" ng-hide="!admin.orderStatus" ng-click="verifyOrder()">Proses</button>
+                            <button class="btn-u" ng-disabled="request.status === 'Approved'" ng-hide="!admin.orderStatus" ng-click="editOrder()">Proses</button>
                             <button class="btn-u" ng-disabled="request.status === 'Approved'" ng-click="deleteOrder()">Delete Order</button>
                         </div>
                     </div>
