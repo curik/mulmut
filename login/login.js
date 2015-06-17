@@ -95,7 +95,7 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
     };
 
     $scope.createAccount = function() {
-      $scope.createButtonDisabled = true;
+      $scope.createButtonDisabled = false;
       $scope.err = null;
       $scope.info = null;
       if( assertValidAccountProps() ) {
@@ -138,7 +138,7 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
                 */
           }, function(err) {
                 $scope.err = errMessage(err);
-                $scope.createButtonDisabled = false;
+                //$scope.createButtonDisabled = false;
           });
       }
     };
@@ -153,10 +153,10 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
       else if( $scope.createMode && $scope.pass !== $scope.confirm ) {
         $scope.err = 'Passwords do not match';
       }
-      else if( $scope.createMode && angular.isUndefined($scope.name) ) {
+      else if( $scope.createMode && !$scope.name) {
           $scope.err = 'Need a name';
       }
-      else if( $scope.createMode && angular.isUndefined($scope.phone) ) {
+      else if( $scope.createMode && !$scope.phone) {
           $scope.err = 'Need a phone number';
       }
       return !$scope.err;

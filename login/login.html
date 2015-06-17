@@ -24,35 +24,35 @@
                 <br/>
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input type="text" placeholder="Your email" ng-model="email" class="form-control">
+                    <input type="text" placeholder="Email saya" ng-model="email" class="form-control">
                 </div>
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" placeholder="Your password" ng-model="pass" class="form-control">
+                    <input type="password" placeholder="Password" ng-model="pass" class="form-control">
                 </div>
                 <div class="input-group margin-bottom-20" ng-show="createMode">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" placeholder="Retype password" ng-model="confirm" class="form-control">
+                    <input type="password" placeholder="Ulangi Password" ng-model="confirm" class="form-control">
                 </div>
                 <div class="input-group margin-bottom-20" ng-show="createMode">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" placeholder="Your name" ng-model="name" class="form-control">
+                    <input type="text" placeholder="Nama saya" ng-model="name" class="form-control">
                 </div>
                 <div class="input-group margin-bottom-20" ng-show="createMode">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                    <input type="text" placeholder="Your phone" ng-model="phone" class="form-control">
+                    <input type="text" placeholder="No HP untuk konfirmasi" ng-model="phone" class="form-control">
                 </div>
 
                 <div class="input-group margin-bottom-20 pull-right" ng-hide="createMode">
                     <button class="btn-u" ng-click="login(email, pass)" ng-disabled="loginButtonDisabled">Login</button>
                     &nbsp;&nbsp;
-                    <button class="btn-u" ng-click="createMode = true">Register</button>
+                    <button class="btn-u" ng-click="createMode = true; err=''">Register</button>
                 </div>
 
                 <div class="input-group margin-bottom-20 pull-right" ng-show="createMode">
                     <button class="btn-u" ng-click="createAccount()" ng-disabled="createButtonDisabled">Create</button>
                     &nbsp;&nbsp;
-                    <button class="btn-u" ng-click="createMode = false">Cancel</button>
+                    <button class="btn-u" ng-click="createMode = false; err=''">Cancel</button>
                 </div>
                 <div class="clearfix"></div>
 
@@ -64,7 +64,7 @@
                 </div>
                 <hr>
                 <div ng-show="email">
-                    <h4>Forget your Password ?</h4>
+                    <h4>Lupa Password?</h4>
                     <p>No worries, <a class="color-green" href="" ng-click="resetPassword(email)">Request a password reset</a></p>
                 </div>
             </form>
