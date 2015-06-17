@@ -104,10 +104,10 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
         var name = $scope.name;
         var phone = $scope.phone;
         var companyName = $scope.companyName;
-        var counter = 0;
+        var counter = 0; // stores the # of orders made by this user
         var mode = "customer"; //user or vendor
         // create user credentials in Firebase auth system
-        Auth.$createUser({counter : counter, email: email, password: pass, name: name, phone: phone, mode: mode, companyName: companyName||""})
+        Auth.$createUser({email: email, password: pass})
           .then(function() {
             // authenticate so we have permission to write to Firebase
             return Auth.$authWithPassword({ email: email, password: pass });
@@ -116,7 +116,7 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
             // create a user profile in our data store
             var ref = fbutil.ref('users', user.uid);
             return fbutil.handler(function(cb) {
-              ref.set({email: email, name: name||firstPartOfEmail(email), phone: phone, mode: mode, companyName: companyName||""}, cb);
+              ref.set({email: email, name: name||firstPartOfEmail(email), counter: counter, phone: phone, mode: mode, companyName: companyName||""}, cb);
             });
           })
           .then(function(/* user */) {

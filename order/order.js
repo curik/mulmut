@@ -138,6 +138,12 @@
             var authData = factory.ref.getAuth();
             factory.userOrdersRef = factory.ref.child("users/" + authData.uid + "/orders");
 
+            //update the counter in the user's profile
+            factory.userCounterRef = factory.ref.child("users/" + authData.uid + "/counter");
+            factory.userCounterRef.transaction(function(counter){
+                return counter+1;
+            }); 
+            
             factory.placeOrder = function(order) {
                 var orderId = 0;
                 var self = this;
@@ -149,11 +155,17 @@
                     if (order.whereTo === "withinCity") {
                         order.whereToArea = "";
                     }
-
+                    
+                    
                     if (orderId > 1000) {
                         var ref = self.ordersRef.push(order);
                         //console.dir(ref);
-                        self.userOrdersRef.push({"orderRef": ref.key(), "orderId": order.orderId, "whereToArea": order.whereToArea, "whereTo": order.whereTo, "orderTime": order.orderTime, "location": order.location, "vehicleCategory": order.vehicleCategory, "vehicleClass": order.vehicleClass, "reservationStartTime": order.reservationStartTime, "rentDuration": order.rentDuration, "rentDurationUnit": order.rentDurationUnit});
+                        self.userOrdersRef.push({"orderRef": ref.key(), "orderId": order.orderId, 
+                            "whereToArea": order.whereToArea, "whereTo": order.whereTo, 
+                            "orderTime": order.orderTime, "location": order.location, 
+                            "vehicleCategory": order.vehicleCategory, "vehicleClass": order.vehicleClass, 
+                            "reservationStartTime": order.reservationStartTime, "rentDuration": order.rentDuration, 
+                            "rentDurationUnit": order.rentDurationUnit});
 
                         $rootScope.$apply(function() {
                             //$location.path("/thankyou/" + orderId);
