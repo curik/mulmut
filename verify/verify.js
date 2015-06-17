@@ -5,17 +5,13 @@
 
     //Order status: new -> verified -> verifyding -> closed
 
-    app.controller('VerifyCtrl', ['$scope', '$routeParams', '$firebaseObject', '$filter', 'user', 'verify', function($scope, $routeParams, $firebaseObject, $filter, user, verify) {
+    app.controller('VerifyCtrl', ['$scope', '$routeParams', '$firebaseObject', '$filter', 'user', 
+        'verify', '$location', function($scope, $routeParams, $firebaseObject, $filter, user, verify, $location) {
         $scope.admin = {};
-        var temp; //to store temp value of request.status 
+    
         var orderRef =  $routeParams.orderRef;
         $scope.request = $firebaseObject(verify.ordersRef.child(orderRef));
-
-        //must wait until firebase finish loading
-        $scope.request.$loaded().then(function() {
-            $scope.checkStatus = $scope.request.status;
-        });
-    
+ 
         $scope.$watch('profileEmail', function() {
             $scope.admin.email = $scope.profileEmail;
             $scope.admin.name = $scope.profileName;
@@ -25,20 +21,21 @@
         
         
         $scope.verifyOrder = function(){
-            verify.verifyOrder($scope.admin.orderStatus,orderRef);
+            var answer = confirm ("Are you sure you want to "+ $scope.admin.orderStatus+ " order # " + $scope.request.orderId + " ?");
+            if (answer)
+                verify.verifyOrder($scope.admin.orderStatus,orderRef,$scope.request.orderId);
         };
-        
-        
 
-        $scope.checkStatus = function(){
-            verify.checkStatus(temp);
-            
+        $scope.deleteOrder = function(){
+            var answer = confirm ("Are you sure you want to delete order # " + $scope.request.orderId + " ?");
+            if (answer)
+                verify.deleteOrder($scope.request.orderId,orderRef);
+
         };
 
         $scope.$on('$destroy', function () {
             $scope.request.$destroy();
-            //$scope.vendor.$destroy();
-            //$scope.balance.$destroy();
+            
         });
     }]);
 
@@ -49,24 +46,42 @@
         "FBURL",
         function($firebase, $location, $rootScope, FBURL) {
             var factory = {};
-
+            var tempId = {};
             factory.ref = new Firebase(FBURL);
             factory.ordersRef = factory.ref.child("orders");
             
-            factory.verifyOrder = function(newstatus,orderRef){
-                alert("Order " + newstatus);
+            factory.verifyOrder = function(newstatus,orderRef,orderIdRef){
                 factory.orderRef = factory.ref.child("orders/" + orderRef);
-                factory.orderRef.update({status : newstatus});
+                // gives notification if successful
+                var onComplete = function(error) {
+                
+                    if (error) {
+                        alert('Error in updating status of order ' + orderIdRef);
+                    } else {
+                        alert('Order # ' + orderIdRef + ' has been ' + newstatus);
+                    }
+                };
+                factory.orderRef.update({status : newstatus}, onComplete);
             };
             
-            factory.checkStatus = function(status){
-                if (status === "Approved"){
-                    return true;
-                } else {
-                    return false;
-                }     
+            factory.deleteOrder = function(orderIdRef,orderRef){
+                tempId = orderIdRef; //because once order is deleted, we lose the orderId value
+                console.log('delete');
+                factory.orderRef = factory.ref.child("orders/" + orderRef);
+                
+                // gives notification if successful
+                var onComplete = function(error) {
+                
+                    if (error) {
+                        alert('Error in deleting order ' + tempId);
+                    } else {
+                        alert('Order # ' + tempId + ' has been deleted!');
+                    }
+                };
+
+                factory.orderRef.remove(onComplete);
             };
-            
+
             return factory;
         }
     ]);

@@ -113,10 +113,14 @@
                     </div>
 
                     <div class="form-group" >
-                    
-                        <input type="radio" name="orderStatus" value="Approved" ng-model="admin.orderStatus"> Approve
+
+                        <input type="radio" name="orderStatus" value="Approved" ng-model="admin.orderStatus" 
+                            ng-disabled="request.status === 'Approved'"
+                        > Approve
                         &nbsp;&nbsp;
-                        <input type="radio" name="orderStatus" value="Cancelled" ng-model="admin.orderStatus"> Cancel
+                        <input type="radio" name="orderStatus" value="Cancelled" ng-model="admin.orderStatus"
+                            ng-disabled="request.status === 'Approved'"
+                        > Cancel
                     </div>
 
                     <div class="row">
@@ -125,10 +129,12 @@
 
                         <div class="col-lg-4 text-right">
                         
-                            <button class="btn-u" ng-disabled="checkStatus === 'Approved'" ng-click="verifyOrder()">Proses</button>
-                            
+                            <button class="btn-u" ng-disabled="request.status === 'Approved'" ng-hide="!admin.orderStatus" ng-click="verifyOrder()">Proses</button>
+                            <button class="btn-u" ng-disabled="request.status === 'Approved'" ng-click="deleteOrder()">Delete Order</button>
                         </div>
                     </div>
+
+
                 
                     <div class="col-lg-4">
                     </div>
