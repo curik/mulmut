@@ -3,8 +3,8 @@
 
     var app = angular.module('myApp.avendors', ['ngRoute']);
 
-    app.controller('avendorsCtrl', ['$scope', '$rootScope','$location', 'fbutil','$firebaseArray', "getUsers", "FBURL",
-        function($scope, $rootScope,$location, fbutil, $firebaseArray, getUsers, FBURL) {
+    app.controller('avendorsCtrl', ['$scope', '$window','$location', 'fbutil','$firebaseArray', "getUsers", "FBURL",
+        function($scope, $window, $location, fbutil, $firebaseArray, getUsers, FBURL) {
         
             var ref = new Firebase(FBURL + "/users");
             var query = ref.orderByChild("mode").equalTo("vendor");     // filter only vendors
@@ -28,7 +28,7 @@
         }
 
         $scope.goToVendor = function (vendorId) {
-            $rootScope.vendorId = vendorId;
+            $window.sessionStorage.vendorId = vendorId;
             $location.path("/vprofile/");
         };
 
@@ -52,6 +52,8 @@
             
             var temp ={};
             factory.userRef = new Firebase(FBURL + "/users/" + id);
+            factory.vendorRef = new Firebase(FBURL + "/vendors/" + id);
+
             var authData = factory.ref.getAuth();
 
             factory.userRef.once("value",function(snap){    //grabs the user's email for alert purposes
@@ -68,6 +70,8 @@
             };
                 // this is using a different function to delete, but does the same thing as remove({})
                 factory.userRef.remove(onComplete);
+                // also remove the vendor from vendors table
+                factory.vendorRef.remove(onComplete);
             }
            
            return factory;

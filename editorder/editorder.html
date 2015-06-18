@@ -13,7 +13,7 @@
                 <table class="table table-striped invoice-table">
                     <tbody>
                     <tr>
-                        <th>RequestID</th>
+                        <th>Order ID</th>
                         <td>{{request.orderId}}</td>
                     </tr>
                     <tr>
@@ -31,23 +31,27 @@
                 <table class="table table-striped invoice-table">
                     <tbody>
                     <tr>
-                        <th>Driver</th>
+                        <th>Supir</th>
                         <td>{{request.driver}}</td>
                     </tr>
                     <tr>
-                        <th>Location</th>
+                        <th>Lokasi</th>
                         <td>{{request.locationDetail}}, {{request.location}}</td>
                     </tr>
                     <tr>
-                        <th>Start Time</th>
+                        <th>Tujuan</th>
+                        <td>{{request.whereToArea}}, {{request.whereTo}}</td>
+                    </tr>
+                    <tr>
+                        <th>Kapan</th>
                         <td>{{request.reservationStartTime}}</td>
                     </tr>
                     <tr>
-                        <th>Rent Duration</th>
+                        <th>Lama Sewa</th>
                         <td>{{request.rentDuration}} {{request.rentDurationUnit}}s</td>
                     </tr>
                     <tr>
-                        <th>Vehicle</th>
+                        <th>Mobil</th>
                         <td>{{request.vehicleClass}} {{request.vehicleCategory}}</td>
                     </tr>
                     <tr ng-show="request.specialRequest">
@@ -66,11 +70,11 @@
                 <table class="table table-striped invoice-table">
                     <tbody>
                     <tr>
-                        <th>Name</th>
+                        <th>Nama</th>
                         <td>{{request.name}}</td>
                     </tr>
                     <tr>
-                        <th>Company</th>
+                        <th>Perusahaan</th>
                         <td>{{request.company}}</td>
                     </tr>
                     <tr>
@@ -130,7 +134,7 @@
                         <div class="col-lg-4 text-right">
                         
                             <button class="btn-u" ng-disabled="request.status === 'Approved'" ng-hide="!admin.orderStatus" ng-click="editOrder()">Proses</button>
-                            <button class="btn-u" ng-disabled="request.status === 'Approved'" ng-click="deleteOrder()">Delete Order</button>
+                            <button class="btn-u" ng-click="deleteOrder()">Delete Order</button>
                         </div>
                     </div>
 

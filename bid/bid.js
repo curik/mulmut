@@ -15,6 +15,8 @@
         $scope.vehicles = {};
         $scope.balance = $firebaseObject(bid.vendorCurrentBalanceRef);
 
+
+
         $scope.vendor.$loaded().then(function() {
             if (angular.isDefined($scope.request.vehicleCategory) && angular.isDefined($scope.vendor.vehicles)) {
                 $scope.vehicles = $scope.vendor.vehicles[$scope.request.vehicleCategory];
@@ -22,6 +24,7 @@
             $scope.quote.company = $scope.vendor.companyName;
             $scope.quote.phone = $scope.vendor.pPhone;
             $scope.quote.contactPerson = $scope.vendor.contactPerson;
+
         });
 
         $scope.$watch('profileEmail', function() {
@@ -66,8 +69,8 @@
             $scope.quote.vehicleYear = $scope.vehicles[carReference].vehicleYear;
             $scope.quote.transmission = $scope.vehicles[carReference].transmission;
             $scope.quote.vehicleString = $scope.vehicles[carReference].string;
-            $scope.quote.dalkotRate = $scope.vehicles[carReference].dalkotRate;
-            $scope.quote.lukotRate = $scope.vehicles[carReference].lukotRate;
+            $scope.quote.baseRate = $scope.vehicles[carReference].dalkotRate;
+            $scope.quote.baseTotal = $scope.quote.baseRate * $scope.request.rentDuration;
             $scope.quote.duration = $scope.vehicles[carReference].duration;
 
         }
@@ -79,6 +82,9 @@
         $scope.placeBid = function() {
             $scope.quote.quoteTime = (new Date()).toLocaleString();
             $scope.quote.quoteTimestamp = (new Date()).getTime();
+            $scope.quote.website = $scope.vendor.website;
+            $scope.quote.companyProfile = $scope.vendor.companyProfile;
+            $scope.quote.terms = $scope.vendor.advanced.terms;
 
             if ($scope.quote.driver === 'withDriver') {
                 if (angular.isDefined($scope.vendor.advanced)) {

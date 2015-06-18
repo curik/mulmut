@@ -68,7 +68,7 @@
                 tempId = orderIdRef; //because once order is deleted, we lose the orderId value
                 console.log('delete');
                 factory.orderRef = factory.ref.child("orders/" + orderRef);
-                
+                factory.userorderRef = factory.ref.child("users/orders" + orderRef); // also delete request stored in user
                 // gives notification if successful
                 var onComplete = function(error) {
                 
@@ -78,7 +78,7 @@
                         alert('Order # ' + tempId + ' has been deleted!');
                     }
                 };
-
+                factory.userorderRef.remove(onComplete);
                 factory.orderRef.remove(onComplete);
             };
 

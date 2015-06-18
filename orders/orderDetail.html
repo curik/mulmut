@@ -12,19 +12,21 @@
                 <div class="pricing">
                     <div class="pricing-head">
                         <h3 class="text-center panel-vendor no-top-margin">{{q.vehicleString}}</h3>
-                        <h4 class="text-center">Base Total: {{q.baseTotal|currency:"Rp ":0}}</h4>
-                        <h4 class="text-center">All-in Price: {{q.allInPrice|currency:"Rp ":0}}</h4>
+                        <h4 class="text-center">Harga Total: {{q.baseTotal|currency:"Rp ":0}}</h4>
+                        <h4 class="text-center">Rate/hari: {{q.baseRate|currency:"Rp ":0}}</h4>
                     </div>
                     <ul class="pricing-content list-unstyled">
-                        <li class="text-center" ng-hide="q.driver === 'withDriver'">Driver not included</li>
-                        <li class="text-center" ng-show="q.driver === 'withDriver'">Driver included</li>
-                        <li class="text-center">Base Rate: {{q.baseRate|currency:"Rp ":0}}/{{q.baseRateUnit}}</li>
-                        <li class="text-center" ng-show="q.driver === 'withDriver'">Driver hourly overtime: {{q.driverHourlyOvertime|currency:"Rp ":0}}</li>
-                        <li class="text-center" ng-show="q.driver === 'withDriver'">Driver daily allowance: {{q.driverDailyAllowancel|currency:"Rp ":0}}</li>
-                        <li class="text-center">Company: {{q.company}}</li>
+                        <li class="text-center" ng-hide="q.driver === 'withDriver'">Lepas Kunci</li>
+                        <li class="text-center" ng-show="q.driver === 'withDriver'">Dengan Supir</li>
+                        <li class="text-center" ng-show="q.driver === 'withDriver'">Overtime Rate/jam: {{q.driverHourlyOvertime|currency:"Rp ":0}}</li>
+                        <li class="text-center" ng-show="q.driver === 'withDriver'">Uang Makan Supir/hari: {{q.driverDailyAllowance|currency:"Rp ":0}}</li>
+                        <li class="text-center">Nama Rental: {{q.company}}</li>
                         <li class="text-center">Contact Person: {{q.contactPerson}}</li>
                         <li class="text-center">Phone: {{q.phone}}</li>
                         <li class="text-center">Email: {{q.email}}</li>
+                        <li class="text-center">Website: {{q.website}}</li>
+                        <li class="text-center">Profile: {{q.companyProfile}}</li>
+                        <li class="text-center">T&C: {{q.terms}}</li>
                     </ul>
                     <div class="pricing-footer text-center" ng-show="q.note">
                         <p><i>{{q.note}}</i></p>
@@ -41,7 +43,7 @@
         <!--Order Table-->
         <div class="panel panel-orange margin-bottom-40" ng-show="order.orderId">
             <div class="panel-heading">
-                <h3 class="panel-title">Detail for Your Request# {{order.orderId}}</h3>
+                <h3 class="panel-title">Detail Permintaan Anda (Order# {{order.orderId}})</h3>
             </div>
             <table class="table table-striped invoice-table">
                 <tbody>

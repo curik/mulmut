@@ -110,6 +110,7 @@
 
             $scope.updateDurationHours();
             $scope.order.orderTime = (new Date()).toLocaleString();
+            
             if(angular.isDefined($scope.order.when)) {
                 $scope.order.reservationStartTimestamp = $scope.order.when.getTime();
                 $scope.order.reservationStartTime = $scope.order.when.toLocaleString();
@@ -165,7 +166,7 @@
                             "orderTime": order.orderTime, "location": order.location, 
                             "vehicleCategory": order.vehicleCategory, "vehicleClass": order.vehicleClass, 
                             "reservationStartTime": order.reservationStartTime, "rentDuration": order.rentDuration, 
-                            "rentDurationUnit": order.rentDurationUnit});
+                        });
 
                         $rootScope.$apply(function() {
                             //$location.path("/thankyou/" + orderId);
