@@ -3,16 +3,16 @@
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <form class="reg-page" name="companyProfileForm" novalidate>
                 <div class="reg-header">
-                    <h2>Company Profile</h2>
+                    <h2>Profil Rental Anda</h2>
                 </div>
                 <br/>
 
                     <div class="form-group">
-                        <label>Company Name:</label>
+                        <label>Nama Perusahaan:</label>
                         <input type="text" class="capitalize form-control margin-bottom-20" name="companyName" ng-model="vprofile.companyName" required/>
                     </div>
                     <div class="form-group">
-                        <label>Company Address:</label>
+                        <label>Alamat:</label>
                         <textarea type="text" class="form-control margin-bottom-20" name="address" rows="3" ng-model="vprofile.address" required/>
                     </div>
                     <div class="form-group">
@@ -20,34 +20,34 @@
                         <input type="text" class="form-control margin-bottom-20" name="contactPerson" ng-model="vprofile.contactPerson" required/>
                     </div>
                     <div class="form-group">
-                        <label>Preferred Phone:</label>
+                        <label>Nomor Telepon 1:</label>
                         <input type="text" class="form-control margin-bottom-20" name="preferredPhone" ng-model="vprofile.pPhone" required/>
                     </div>
                     <div class="form-group">
-                        <label>Other Phone 1:</label>
+                        <label>Nomor Telepon 2:</label>
                         <input type="text" class="form-control margin-bottom-20" name="otherPhone1" ng-model="vprofile.oPhone1"/>
                     </div>
                     <div class="form-group">
-                        <label>Other Phone 2:</label>
+                        <label>Nomor Telepon 3:</label>
                         <input type="text" class="form-control margin-bottom-20" name="otherPhone2" ng-model="vprofile.oPhone2"/>
                     </div>
                     <div class="form-group">
-                        <label>Business Hours:</label>
+                        <label>Saya buka pada hari dan jam:</label>
                         <input type="text" class="form-control margin-bottom-20" name="businessHours" ng-model="vprofile.businessHours" required/>
                     </div>
                     <div class="form-group">
-                        <label>Company Profile:</label>
+                        <label>Syarat Menyewa:</label>
                         <textarea type="text" class="form-control margin-bottom-20" name="companyProfile" rows="10" ng-model="vprofile.companyProfile"/>
                     </div>
                     <div class="form-group">
-                        <label>Company Website</label>
+                        <label>Website Saya:</label>
                         <input type="text" class="form-control margin-bottom-20" name="website" ng-model="vprofile.website"/>
                     </div>
                     <div class="form-group">
-                        <label>Account Email:</label>
+                        <label>Email:</label>
                         <input type="text" class="form-control margin-bottom-20" name="email" ng-model="vprofile.email" />
                     </div>
-                    <button class="btn-u" ng-click="mode='settings'" ng-disabled="companyProfileForm.$invalid">Register Cars</button>
+                    <button class="btn-u" ng-click="mode='settings'" ng-disabled="companyProfileForm.$invalid">Advanced Settings</button>
 
             </form>
         </div>
@@ -56,14 +56,14 @@
             <form class="reg-page" name="advancedSettingsForm" novalidate>
                 <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                     <div class="reg-header">
-                        <h2>Advanced Settings</h2>
+                        <h2>Pengaturan Kendaraan</h2>
                     </div>
                     <br/>
 
                     <div class="form-group">
-                        <label for="operationRegion" class="control-label">Operation Region:</label>
+                        <label for="operationRegion" class="control-label">Kota Anda:</label>
                         <select class="form-control margin-bottom-20" id="operationRegion" ng-model="vprofile.advanced.operationRegion" required>
-                            <option value="" disabled selected>Select your location</option>
+                            <option value="" disabled selected>Pilih kota anda</option>
                             <option value="Jakarta">Jakarta</option>
                             <option value="Bogor">Bogor</option>
                             <option value="Depok">Depok</option>
@@ -74,19 +74,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Hours of Operation:</label>
+                        <label>Waktu Pemakaian Kendaraan:</label>
                         <input type="text" class="form-control margin-bottom-20" name="operationHours" ng-model="vprofile.advanced.operationHours" required/>
                     </div>
 
-                    <div class="form-group">
-                        <label>Default base rate:</label>
-                        <input type="number" min="0" class="form-control margin-bottom-20" name="baseRate" rows="3" ng-model="vprofile.advanced.defaultBaseRate"/>
-                    </div>
-                    <select class="form-control margin-bottom-20" id="baseRateUnit" ng-model="vprofile.advanced.defaultBaseRateUnit">
-                        <option value="" disabled selected>Select Unit</option>
-                        <option value="Hour">Hourly</option>
-                        <option value="Day">Daily</option>
-                    </select>
+
                     <!--
                     <div class="form-group">
                         <label>Default daily all-in price:</label>
@@ -94,11 +86,11 @@
                     </div>
                     -->
                     <div class="form-group">
-                        <label>Driver hourly overtime rate:</label>
+                        <label>Overtime Rate (per jam):</label>
                         <input type="number" min="0" class="form-control margin-bottom-20" name="overtimeRate" rows="3" ng-model="vprofile.advanced.driverHourlyOvertime"/>
                     </div>
                     <div class="form-group">
-                        <label>Driver daily allowance for meals:</label>
+                        <label>Uang Makan Supir (per hari):</label>
                         <input type="number" min="0" class="form-control margin-bottom-20" name="dailyAllowance" ng-model="vprofile.advanced.driverDailyAllowance"/>
                     </div>
                 </div>
@@ -106,15 +98,18 @@
                 <div class="clearfix"></div>
                 <br/>
                 <br/>
-                <h3>Available Vehicles</h3>
+                <h3>Daftar Kendaraan Saya</h3>
                 <div class="form-group" ng-hide="advancedSettingsForm.$invalid">
                     <table class="table invoice-table">
                         <tr>
-                            <th>Vehicle Category</th>
-                            <th>Make</th>
-                            <th>Type</th>
-                            <th>Year</th>
-                            <th>Transmission</th>
+                            <th>Kategori</th>
+                            <th>Merek</th>
+                            <th>Tipe</th>
+                            <th>Tahun</th>
+                            <th>Transmisi</th>
+                            <th>Rate Dalam Kota</th>
+                            <th>Rate Luar Kota</th>
+                            <th>Lama Sewa</th>
                             <th>Action</th>
                         </tr>
                         <tr ng-repeat="(key,item) in vprofile.vehicles.Hatchback | orderBy:'vehicleType':true">
@@ -123,6 +118,9 @@
                             <td class="capitalize">{{item.vehicleType}}</td>
                             <td>{{item.vehicleYear}}</td>
                             <td>{{item.transmission}}</td>
+                            <td>{{item.dalkotRate}}</td>
+                            <td>{{item.lukotRate}}</td>
+                            <td>{{item.duration}}</td>
                             <td><a ng-click="removeVehicle('Hatchback', key)" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-remove"></i></a></td>
                         </tr>
                         <tr ng-repeat="(key,item) in vprofile.vehicles.Sedan | orderBy:'vehicleType':true">
@@ -131,6 +129,9 @@
                             <td class="capitalize">{{item.vehicleType}}</td>
                             <td>{{item.vehicleYear}}</td>
                             <td>{{item.transmission}}</td>
+                            <td>{{item.dalkotRate}}</td>
+                            <td>{{item.lukotRate}}</td>
+                            <td>{{item.duration}}</td>
                             <td><a ng-click="removeVehicle('Sedan', key)" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-remove"></i></a></td>
                         </tr>
                         <tr ng-repeat="(key,item) in vprofile.vehicles.SUV | orderBy:'vehicleType':true">
@@ -139,6 +140,9 @@
                             <td class="capitalize">{{item.vehicleType}}</td>
                             <td>{{item.vehicleYear}}</td>
                             <td>{{item.transmission}}</td>
+                            <td>{{item.dalkotRate}}</td>
+                            <td>{{item.lukotRate}}</td>
+                            <td>{{item.duration}}</td>
                             <td><a ng-click="removeVehicle('SUV', key)" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-remove"></i></a></td>
                         </tr>
                         <tr ng-repeat="(key,item) in vprofile.vehicles.MPV | orderBy:'vehicleType':true">
@@ -147,6 +151,9 @@
                             <td class="capitalize">{{item.vehicleType}}</td>
                             <td>{{item.vehicleYear}}</td>
                             <td>{{item.transmission}}</td>
+                            <td>{{item.dalkotRate}}</td>
+                            <td>{{item.lukotRate}}</td>
+                            <td>{{item.duration}}</td>
                             <td><a ng-click="removeVehicle('MPV', key)" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-remove"></i></a></td>
                         </tr>
                         <tr ng-repeat="(key,item) in vprofile.vehicles.Minibus | orderBy:'vehicleType':true">
@@ -155,12 +162,15 @@
                             <td class="capitalize">{{item.vehicleType}}</td>
                             <td>{{item.vehicleYear}}</td>
                             <td>{{item.transmission}}</td>
+                            <td>{{item.dalkotRate}}</td>
+                            <td>{{item.lukotRate}}</td>
+                            <td>{{item.duration}}</td>
                             <td><a ng-click="removeVehicle('Minibus', key)" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-remove"></i></a></td>
                         </tr>
                         <tr>
                             <td>
                                 <select ng-model="newVehicle.vehicleCategory">
-                                    <option value="" disabled selected>Vehicle Category</option>
+                                    <option value="" disabled selected>Kategori</option>
                                     <option value="Hatchback">Hatchback</option>
                                     <option value="Sedan">Sedan</option>
                                     <option value="SUV">SUV</option>
@@ -170,7 +180,7 @@
                             </td>
                             <td>
                                 <select ng-model="newVehicle.vehicleMake">
-                                    <option value="" disabled selected>Make</option>
+                                    <option value="" disabled selected>Merek</option>
                                     <option value="Daihatsu">Daihatsu</option>
                                     <option value="Honda">Honda</option>
                                     <option value="Isuzu">Isuzu</option>
@@ -182,10 +192,10 @@
                                     <option value="Toyota">Toyota</option>
                                 </select>
                             </td>
-                            <td><input class="capitalize" type="text" ng-model="newVehicle.vehicleType" placeholder="Innova" /></td>
+                            <td><input class="capitalize" type="text" ng-model="newVehicle.vehicleType" placeholder="Avanza 1.5G" /></td>
                             <td>
                                 <select ng-model="newVehicle.vehicleYear">
-                                    <option value="" disabled selected>Year</option>
+                                    <option value="" disabled selected>Tahun</option>
                                     <option value="2015">2015</option>
                                     <option value="2014">2014</option>
                                     <option value="2013">2013</option>
@@ -197,18 +207,23 @@
                                     <option value="2007">2007</option>
                                     <option value="2006">2006</option>
                                     <option value="2005">2005</option>
-                                    <option value="2004">2004</option>
-                                    <option value="2003">2003</option>
-                                    <option value="2002">2002</option>
-                                    <option value="2001">2001</option>
-                                    <option value="2000">2000</option>
+                                    
                                 </select>
                             </td>
                             <td>
                                 <select ng-model="newVehicle.transmission">
-                                    <option value="" disabled selected>Transmission</option>
-                                    <option value="MT">Manual</option>
-                                    <option value="AT">Automatic</option>
+                                    <option value="" disabled selected>Transmisi</option>
+                                    <option value="MT">MT</option>
+                                    <option value="AT">AT</option>
+                                </select>
+                            </td>
+                            <td><input class="capitalize" type="text" ng-model="newVehicle.dalkotRate" placeholder="Rp" /></td>
+                            <td><input class="capitalize" type="text" ng-model="newVehicle.lukotRate" placeholder="Rp" /></td>
+                            <td>
+                                <select ng-model="newVehicle.duration">
+                                    <option value="" disabled selected>Jam</option>
+                                    <option value="12 jam">12 jam</option>
+                                    <option value="24 jam">24 jam</option>
                                 </select>
                             </td>
                             <td class="text-center"><a class="btn btn-info btn-sm" ng-click="addVehicle()"><i class="glyphicon glyphicon-plus"></i></a></td>
@@ -220,7 +235,7 @@
                 <br/>
                 <br/>
 
-                <button class="btn-u" ng-click="mode = 'profile'" ng-disabled="advancedSettingsForm.$invalid">Back to Company Profile</button>
+                <button class="btn-u" ng-click="mode = 'profile'" ng-disabled="advancedSettingsForm.$invalid">Kembali</button>
             </form>
         <br/>
         <!--</div>-->

@@ -57,7 +57,8 @@
             return ($scope.myBalance > -5000);
         }
 
-        $scope.updateCarData = function() {
+        // put vehicle data into variable quote when a vendor selects a car
+        $scope.updateCarData = function() {       
             var carReference = $scope.quote.carReference;
             $scope.quote.vehicleCategory = $scope.vehicles[carReference].vehicleCategory;
             $scope.quote.vehicleMake = $scope.vehicles[carReference].vehicleMake;
@@ -65,6 +66,10 @@
             $scope.quote.vehicleYear = $scope.vehicles[carReference].vehicleYear;
             $scope.quote.transmission = $scope.vehicles[carReference].transmission;
             $scope.quote.vehicleString = $scope.vehicles[carReference].string;
+            $scope.quote.dalkotRate = $scope.vehicles[carReference].dalkotRate;
+            $scope.quote.lukotRate = $scope.vehicles[carReference].lukotRate;
+            $scope.quote.duration = $scope.vehicles[carReference].duration;
+
         }
 
         $scope.updatePhoneNumber = function() {

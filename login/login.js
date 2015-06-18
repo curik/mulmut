@@ -8,7 +8,8 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
     });
   }])
 
-  .controller('LoginCtrl', ['$scope', '$rootScope', 'Auth', '$location', '$routeParams', 'fbutil', function($scope, $rootScope, Auth, $location, $routeParams, fbutil) {
+  .controller('LoginCtrl', ['$scope', '$window','$rootScope', 'Auth', '$location', '$routeParams', 'fbutil',
+      function($scope, $window, $rootScope, Auth, $location, $routeParams, fbutil) {
     $scope.email = null;
     $scope.pass = null;
     $scope.confirm = null;
@@ -68,7 +69,7 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
                   //$location.path('/order');
                   $rootScope.$apply(function() {
                       if(profile.mode === 'vendor') {
-                          $rootScope.vendorId = user.uid;
+                          $window.sessionStorage.vendorId = user.uid;
                           $location.path("/bidboard");
                       } else if(profile.mode === 'admin') {
                           $location.path("/aorders");

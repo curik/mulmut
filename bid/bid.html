@@ -6,12 +6,12 @@
             <!--Requests Table-->
             <div class="panel panel-orange margin-bottom-40" ng-show="request">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Customer Request</h3>
+                    <h3 class="panel-title">Butuh Mobil Sewa</h3>
                 </div>
                 <table class="table table-striped invoice-table">
                     <tbody>
                     <tr>
-                        <th>RequestID</th>
+                        <th>Order ID</th>
                         <td>{{request.orderId}}</td>
                     </tr>
                     <tr>
@@ -19,23 +19,27 @@
                         <td>{{request.status}}</td>
                     </tr>
                     <tr>
-                        <th>Driver</th>
+                        <th>Supir</th>
                         <td>{{request.driver}}</td>
                     </tr>
                     <tr>
-                        <th>Location</th>
+                        <th>Dari</th>
                         <td>{{request.locationDetail}}, {{request.location}}</td>
                     </tr>
                     <tr>
-                        <th>Start Time</th>
+                        <th>Menuju</th>
+                        <td>{{request.whereToArea}}{{request.whereTo}}</td>
+                    </tr>
+                    <tr>
+                        <th>Kapan</th>
                         <td>{{request.reservationStartTime}}</td>
                     </tr>
                     <tr>
-                        <th>Rent Duration</th>
+                        <th>Selama</th>
                         <td>{{request.rentDuration}} {{request.rentDurationUnit}}s</td>
                     </tr>
                     <tr>
-                        <th>Vehicle</th>
+                        <th>Jenis Mobil</th>
                         <td>{{request.vehicleClass}} {{request.vehicleCategory}}</td>
                     </tr>
                     <tr ng-show="request.specialRequest">
@@ -52,35 +56,21 @@
             <!--Bid Form-->
             <div class="panel panel-orange margin-bottom-40" ng-show="request && !myQuote">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Your Best Offer for Request# {{request.orderId}}</h3>
+                    <h3 class="panel-title">Penawaran Terbaik Saya</h3>
                 </div>
                 <form class="reg-page-m" name="bidForm" ng-submit="placeBid()" role="form" novalidate>
 
                     <div class="clearfix"></div>
 
                     <div class="form-group">
-                        <label for="companyName" class="control-label">Company Name</label>
-                        <input type="text" class="form-control margin-bottom-20" id="companyName" ng-model="quote.company" readonly required>
-                    </div>
-                    <div class="form-group">
                         <label for="contactPerson" class="control-label">Contact Person</label>
                         <input type="text" class="form-control margin-bottom-20" id="contactPerson" ng-model="quote.contactPerson" readonly required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="companyEmail" class="control-label">Company Email</label>
-                        <input type="text" class="form-control margin-bottom-20" id="companyEmail" ng-model="quote.email" readonly required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="companyPhone" class="control-label">Company Phone</label>
-                        <input type="text" class="form-control margin-bottom-20" id="companyPhone" ng-model="quote.phone" readonly required>
-                    </div>
-
                     <div class="form-group well" ng-show="quote.driver==='withDriver'">
-                        <label class="control-label">From Your Settings</label>
-                        Driver hourly overtime: {{(vendor.advanced.driverHourlyOvertime||0)|currency:"Rp ":0}}<br/>
-                        Driver daily allowance: {{(vendor.advanced.driverDailyAllowance||0)|currency:"Rp ":0}}
+                        <label class="control-label">Keterangan</label>
+                        Biaya Overtime (per jam): {{(vendor.advanced.driverHourlyOvertime||0)|currency:"Rp ":0}}<br/>
+                        Uang makan supir per hari: {{(vendor.advanced.driverDailyAllowance||0)|currency:"Rp ":0}}
                     </div>
 
                     <div class="form-group" ng-show="quote.driver==='withoutDriver'">
@@ -89,35 +79,28 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">Car to offer</label>
+                        <label class="control-label">Mobil yang saya tawarkan</label>
+
                         <select ng-model="quote.carReference" ng-options="k as v.string for (k, v) in vehicles" ng-change="updateCarData()" required>
-                            <option value="" disable selected>Select car from inventory</option>
+                            <option value="" disable selected>Pilih Mobil</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="baseRate" class="control-label">Base Rate</label>
-                        <input type="number" min="0" class="form-control" id="baseRate" ng-model="quote.baseRate" placeholder="0" required>
-                        <input type="radio" name="baseRateUnit" value="Hour" ng-model="quote.baseRateUnit"> Hourly
-                        &nbsp;&nbsp;
-                        <input type="radio" name="baseRateUnit" value="Day" ng-model="quote.baseRateUnit"> Daily
-                        &nbsp;&nbsp;
-                        <input type="radio" name="baseRateUnit" value="Week" ng-model="quote.baseRateUnit"> Weekly
+                        <label for="baseRate" class="control-label">Rate Per {{quote.duration}}</label>
+                        <input type="text" style="width: 100px" class="form-control" id="baseRate" ng-model="quote.dalkotRate" 
+                            placeholder="{{quote.dalkotRate}}" required>    
+                        
                     </div>
 
                     <div class="form-group">
-                        <label for="baseTotal" class="control-label">Base Total</label>
-                        <input type="number" min="0" class="form-control margin-bottom-20" id="baseTotal" ng-model="quote.baseTotal" placeholder="Base Total" required>
+                        <label for="baseTotal" class="control-label">Total Harga Sewa</label>
+                        <input type="text" class="form-control margin-bottom-20" id="baseTotal" ng-model="quote.baseTotal" placeholder="{{quote.dalkotRate * request.rentDuration}}" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="allInPrice" class="control-label">All-inclusive Price</label>
-                        <input type="number" min="0" class="form-control margin-bottom-20" id="allInPrice" ng-model="quote.allInPrice" placeholder="All-In Price">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputNote" class="control-label">Note</label>
-                        <textarea class="form-control margin-bottom-20" id="inputNote" ng-model="quote.note" ng-minlength="3" rows="3" placeholder="Anything else customer would need to know? Automatic/Manual, ..."></textarea>
+                        <label for="inputNote" class="control-label">Informasi Tambahan</label>
+                        <textarea class="form-control margin-bottom-20" id="inputNote" ng-model="quote.note" ng-minlength="3" rows="3" placeholder="Customer adalah raja, berilah kesan yang positif untuk mendapatkan mereka"></textarea>
                     </div>
 
                     <div class="row">
