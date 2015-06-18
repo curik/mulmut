@@ -1,21 +1,21 @@
 (function (angular) {
     "use strict";
 
-    var app = angular.module('myApp.ausers', ['ngRoute']);
+    var app = angular.module('myApp.avendors', ['ngRoute']);
 
-    app.controller('AUsersCtrl', ['$scope', '$location', 'fbutil','$firebaseArray', "getUsers", "FBURL",
-        function($scope, $location, fbutil, $firebaseArray, getUsers, FBURL) {
-          
-        var ref = new Firebase(FBURL + "/users");
-            var query = ref.orderByChild("mode").equalTo("customer");     // filter only customers
+    app.controller('avendorsCtrl', ['$scope', '$rootScope','$location', 'fbutil','$firebaseArray', "getUsers", "FBURL",
+        function($scope, $rootScope,$location, fbutil, $firebaseArray, getUsers, FBURL) {
+        
+            var ref = new Firebase(FBURL + "/users");
+            var query = ref.orderByChild("mode").equalTo("vendor");     // filter only vendors
 
             $scope.users = $firebaseArray(query);
 
-        $scope.status = "Retrieving users ...";
+        $scope.status = "Retrieving vendors ...";
         
         $scope.users.$loaded().then(function() {
            if (angular.isUndefined($scope.users) || $scope.users.length === 0) {
-               alert("No users found");
+               alert("No vendors found");
            }
         });
 
@@ -26,6 +26,11 @@
                 getUsers.removeUser(id);
             
         }
+
+        $scope.goToVendor = function (vendorId) {
+            $rootScope.vendorId = vendorId;
+            $location.path("/vprofile/");
+        };
 
         $scope.$on('$destroy', function () {
             $scope.users.$destroy();
@@ -49,11 +54,6 @@
             factory.userRef = new Firebase(FBURL + "/users/" + id);
             var authData = factory.ref.getAuth();
 
-            if (authData.uid === id){                       // prevent from deleting self
-                alert ('You can NOT delete yourself!');
-                return;
-            }
-
             factory.userRef.once("value",function(snap){    //grabs the user's email for alert purposes
                 temp = snap.val().email;
             });
@@ -61,23 +61,23 @@
             var onComplete = function(error) {  // gives notification if successful
                 
             if (error) {
-                alert('Error in deleting user');
+                alert('Error in deleting vendor');
                 } else {
-                    alert('User '+ temp +' has been deleted!');
+                    alert('Vendor '+ temp +' has been deleted!');
                 }
             };
                 // this is using a different function to delete, but does the same thing as remove({})
                 factory.userRef.remove(onComplete);
-        }
-            return factory;
-
+            }
+           
+           return factory;
         }
     ]);
 
     app.config(['$routeProvider', function($routeProvider) {
-        $routeProvider.whenAuthenticated('/ausers', {
-            templateUrl: 'ausers/ausers.html',
-            controller: 'AUsersCtrl'
+        $routeProvider.whenAuthenticated('/avendors', {
+            templateUrl: 'avendors/avendors.html',
+            controller: 'avendorsCtrl'
         });
     }]);
 

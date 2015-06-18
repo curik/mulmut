@@ -3,14 +3,15 @@
 
   var app = angular.module('myApp.vprofile', ['firebase', 'firebase.utils', 'firebase.auth', 'ngRoute']);
 
-  app.controller('VProfileCtrl', ['$scope', 'Auth', 'fbutil', 'user', '$location', '$firebaseObject',
-    function($scope, Auth, fbutil, user, $location, $firebaseObject) {
+  app.controller('VProfileCtrl', ['$scope', '$rootScope','Auth', 'fbutil', 'user', '$location', '$firebaseObject',
+    function($scope, $rootScope, Auth, fbutil, user, $location, $firebaseObject) {
         $scope.mode = "profile"; //profile or settings
         $scope.newVehicle = {};
 
       var unbind;
       // create a 3-way binding with the user profile object in Firebase
-      var vprofile = $firebaseObject(fbutil.ref('vendors', user.uid));
+      //var vprofile = $firebaseObject(fbutil.ref('vendors', user.uid));
+      var vprofile = $firebaseObject(fbutil.ref('vendors', $rootScope.vendorId));
       var hatchbackRef = fbutil.ref('vendors/' + user.uid + "/vehicles/Hatchback");
       var sedanRef = fbutil.ref('vendors/' + user.uid + "/vehicles/Sedan");
       var mpvRef = fbutil.ref('vendors/' + user.uid + "/vehicles/MPV");
@@ -20,10 +21,7 @@
       vprofile.$bindTo($scope, 'vprofile').then(function(ub) {
           unbind = ub;
       });
-
-        $scope.$watch('profileEmail', function() {
-            $scope.email = $scope.profileEmail;
-        });
+        
 
         $scope.addVehicle = function() {
             if(angular.isDefined($scope.newVehicle.vehicleCategory) && angular.isDefined($scope.newVehicle.vehicleMake) && angular.isDefined($scope.newVehicle.vehicleType) && angular.isDefined($scope.newVehicle.vehicleYear) && angular.isDefined($scope.newVehicle.transmission)) {

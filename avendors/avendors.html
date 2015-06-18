@@ -1,0 +1,44 @@
+<!--=== Content Part ===-->
+<br/>
+<div class="container">
+    <div class="row" ng-hide="users">
+        {{status}}
+    </div>
+    <!--<div class="row">-->
+        <!--users Table-->
+        <div class="panel panel-orange margin-bottom-40" ng-show="users">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">All Vendors</h3>
+            </div>
+            <table class="table table-striped table-hover invoice-table fit-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Mode</th>
+                    <th># Orders</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,val) in users | orderBy:'name':true" ng-click="goToVendor(val.$id)">
+                    <td>{{val.name}}</td>
+                    <td>{{val.companyName}}</td>
+                    <td>{{val.email}}</td>
+                    <td>{{val.phone}}</td>       
+                    <td>{{val.mode}}</td>   
+                    <td>{{val.counter}}</td>
+                    <td><a ng-click="removeUser(val.$id)" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-remove"></i></a></td>
+                    <!--td>{{val.quotes | getNumQuotes:this}}</td-->
+               
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--End users Table-->
+    <!--</div>-->
+</div><!--/container-->
+<br/>
+<!--=== End Content Part ===-->

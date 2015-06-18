@@ -88,6 +88,11 @@
                             Users
                         </a>
                     </li>
+                    <li class="dropdown" ng-show="profileMode === 'admin'">
+                        <a href="#/avendors" class="dropdown-toggle" data-toggle="dropdown">
+                            Vendors
+                        </a>
+                    </li>
                     <li class="dropdown" ng-show="profileMode === 'vendor'">
                         <a href="#/vprofile" class="dropdown-toggle" data-toggle="dropdown">
                             Profile & Settings
@@ -166,6 +171,7 @@
 <script src="logout/logout.js"></script>
 <script src ="aorders/aorders.js"></script>
 <script src ="ausers/ausers.js"></script>
+<script src ="avendors/avendors.js"></script>
 <script src ="editorder/editorder.js"></script> 
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

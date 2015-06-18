@@ -68,6 +68,7 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
                   //$location.path('/order');
                   $rootScope.$apply(function() {
                       if(profile.mode === 'vendor') {
+                          $rootScope.vendorId = user.uid;
                           $location.path("/bidboard");
                       } else if(profile.mode === 'admin') {
                           $location.path("/aorders");
