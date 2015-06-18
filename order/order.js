@@ -44,7 +44,7 @@
         $scope.order.vehicleCategory = "Hatchback";
         $scope.order.vehicleClass = "Standard";
         $scope.order.location = "Jakarta";
-        $scope.order.rentDurationUnit = "Hour";
+        $scope.order.rentDurationUnit = "Day";
         
         $scope.$watch('profileEmail', function() {
             $scope.order.email = $scope.profileEmail;
